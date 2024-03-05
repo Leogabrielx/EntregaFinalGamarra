@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <h3>Detalle articulo</h3>
+
+    <div class="container">
+        <div class="card m-2">
+            <div class="card-body">
+                <h3 class="card-title">{{ articulo.titulo }}</h3>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{ articulo.categoria }}</h6>
+                <h6 class="card-subtitle mb-2 text-body-primary">{{ articulo.subtitulo }}</h6>
+                {% if articulo.imagen %}
+                    <img src="{{articulo.imagen.url}}" height="250px">
+                {% endif %}
+                <p class="card-text">{{ articulo.texto | safe }}</p>
+                {% if articulo.autor.infoextra.avatar %}
+                    <img src={{articulo.autor.infoextra.avatar.url}} alt="" height="40px">
+                    {{ articulo.autor }} - {{ articulo.fecha_publicacion }}
+                {% else %}
+                    <p class="card-text">{{ articulo.autor }} - {{ articulo.fecha_publicacion }}</p>
+                {% endif %}
+                {% if request.user == articulo.autor %}
+                    <a href="{% url 'editar_articulo' articulo.id %}">Editar</a> - <a href="{% url 'eliminar_articulo' articulo.id %}">Eliminar</a>
+                {% endif %}
+            </div>
+        </div>  
+        <h5>Comentarios:</h5>
+        {% if comentarios %}
+            <div class="m-2">
+                <ul>
+                    {% for comentario in comentarios %}
+                    <li>
+                        {% if comentario.usuario.infoextra.avatar %}
+                            <img src={{comentario.usuario.infoextra.avatar.url}} alt="" height="40px">
+                        {% endif %}
+                        <strong>{{ comentario.fecha_comentario }} | {{ comentario.usuario.username }}:</strong>
+                        {{ comentario.comentario }}
+
+                        {% if comentario.usuario == user %}
+                            <a href="{% url 'eliminar_comentario' comentario.id %}" class="btn btn-danger">Eliminar</a>
+                        {% endif %}
+
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p>Todavía no hay ningún comentario</p>
+        {% endif %}
+
+        <div>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'nuevo_comentario' articulo_id=articulo.id %}" class="btn btn-primary">Comentar</a>
+            {% endif %}
+        </div>
+    </div>
+    <a href="{% url 'homepage' %}" class="btn btn-primary">Volver</a>
+{% endblock %}

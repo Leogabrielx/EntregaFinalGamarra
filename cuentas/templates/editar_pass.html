@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header text-center">Cambiar Contraseña</div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="{{ form.old_password.id_for_label }}">Contraseña anterior</label>
+                                {{ form.old_password }}
+                                {{ form.old_password.errors }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.new_password1.id_for_label }}">Nueva contraseña</label>
+                                {{ form.new_password1 }}
+                                {{ form.new_password1.errors }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.new_password2.id_for_label }}">Confirmar nueva contraseña</label>
+                                {{ form.new_password2 }}
+                                {{ form.new_password2.errors }}
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Cambiar Contraseña</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

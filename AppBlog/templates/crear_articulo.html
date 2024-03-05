@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <h2>Articulos</h2>
+
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header text-center">Crear Nuevo Artículo</div>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="{{ form.categoria.id_for_label }}">Categoría</label>
+                                {{ form.categoria }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.titulo.id_for_label }}">Título</label>
+                                {{ form.titulo }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.subtitulo.id_for_label }}">Subtítulo</label>
+                                {{ form.subtitulo }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.texto.id_for_label }}">Texto</label>
+                                <div>{{ form.texto }}</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.imagen.id_for_label }}">Imagen</label>
+                                {{ form.imagen }}
+                            </div>
+                            {{form.media}}
+                            <button type="submit" class="btn btn-primary btn-block">Guardar Artículo</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

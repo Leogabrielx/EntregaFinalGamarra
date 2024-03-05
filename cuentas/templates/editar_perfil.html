@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header text-center">Editar Perfil</div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'editar_perfil' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% if request.user.infoextra.avatar %}
+                                <div class="d-flex justify-content-center">
+                                    <img class="form-group" src={{request.user.infoextra.avatar.url}} alt="" height="100px">
+                                </div>
+                            {% endif %}
+                            <div class="form-group">
+                                <label for="{{ form.email.id_for_label }}">Email</label>
+                                {{ formulario.email }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.first_name.id_for_label }}">Nombre</label>
+                                {{ formulario.first_name }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.last_name.id_for_label }}">Apellido</label>
+                                {{ formulario.last_name }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.link.id_for_label }}">Link</label>
+                                {{ formulario.link }}
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.avatar.id_for_label }}">Avatar</label>
+                                {{ formulario.avatar }}
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success btn-block">Guardar cambios</button>
+                            </div>
+                        </form>
+                        <a href="{% url 'editar_pass' %}">Cambiar contraseña</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+

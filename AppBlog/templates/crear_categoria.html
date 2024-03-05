@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <h2>Categorias</h2>
+    <div class="mt-3" align="center">
+        <h3>Crear nueva categoria</h3>
+        <form action="{% url 'crear_categoria' %}" method="post">
+            {% csrf_token %}
+            <table>
+                {{form}}
+            </table>
+
+            <input class="btn btn-primary" type="submit" value="Crear" />
+
+        </form>
+    </div>
+
+{% endblock %}

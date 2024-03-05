@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header text-center">Iniciar Sesión</div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="username">Usuario</label>
+                                <input type="text" class="form-control" id="username" name="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+                            </div>
+                            {% if error_message %}
+                                <div class="alert alert-danger mt-3">{{ error_message }}</div>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

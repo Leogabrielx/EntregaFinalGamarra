@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <h2>Categorias</h2>
+    <div class="mt-3 col-4" align="center">
+        <h3>Editar categoria</h3>
+        <form action="{% url 'editar_categoria' categoria.id %}" method="post">
+            {% csrf_token %}
+            <table>
+                {{form}}
+            </table>
+
+            <input class="btn btn-primary" type="submit" value="Editar" />
+
+        </form>
+    </div>
+
+{% endblock %}

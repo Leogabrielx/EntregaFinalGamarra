@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <div class="mt-3" align="center">
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Estás seguro de que deseas eliminar este comentario?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar Comentario</button>
+            <a href="{% url 'detalle_articulo' object.articulo.pk %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+{% endblock %}

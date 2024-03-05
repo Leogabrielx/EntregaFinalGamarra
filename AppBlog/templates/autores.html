@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+    
+    <h2>Autores</h2>
+
+    <div class="container mt-3" style="width: 20rem;">
+        <h3>Cargar nuevo autor</h3>
+        {% if miFormulario.errors %}
+            <p class="danger">Datos incorrectos</p>
+        {% endif %}
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ miFormulario.as_table }}
+            </table>
+            <div class="row justify-content-center mt-2">
+                <button class="btn btn-primary col-4" type="submit">Agregar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container mt-3">
+        <h6>Autores existentes:</h6>
+
+        {% if autores %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for autor in autores %}
+                    <tr>
+                        <td>{{ autor.nombre }}</td>
+                        <td>{{ autor.email }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No hay autores registrados.</p>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

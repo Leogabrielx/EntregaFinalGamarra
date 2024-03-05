@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <h2>Nuevo Comentario</h2>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header text-center">Crear Nuevo Artículo</div>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="{{ form.comentario.id_for_label }}">Comentario</label>
+                                {{ form.comentario }}
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Publicar Comentario</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

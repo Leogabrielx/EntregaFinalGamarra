@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <h2>Categorias</h2>
+
+    <div class="container mt-3" style="width: 20rem;">
+
+        <form action="">
+            <input type="text" name='nombre' placeholder='Ingrese categoria...'>
+            <input class="btn btn-primary" type="submit" value="Buscar" />
+        </form>
+        
+        <a href="{% url 'crear_categoria' %}">Crear Nueva Categoria</a>
+
+    </div>
+
+    <div class="container mt-3">
+
+        {% if listado_categorias %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in listado_categorias %}
+                <tr>
+                    <td>{{ categoria.nombre }} </td>
+                    <td><a href="{% url 'detalle_categoria' categoria.id %}">Detalle</a> || <a href="{% url 'editar_categoria' categoria.id %}">Editar</a> || <a href="{% url 'eliminar_categoria' categoria.id %}">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>No hay categorias registradas.</p>
+
+    {% endif %}
+    </div>
+
+    
+
+{% endblock %}

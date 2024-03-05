@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <h2>Categorias</h2>
+    <div class="mt-3" align="center">
+        <h3>Eliminar categoria</h3>
+        <form action="{% url 'eliminar_categoria' categoria.id %}" method="post">
+            {% csrf_token %}
+            <p>Está seguro de eliminar la categoria <b>{{categoria}}</b>?</p>
+
+            <input class="btn btn-primary" type="submit" value="Confirmar" />
+        </form>
+    </div>
+
+{% endblock %}

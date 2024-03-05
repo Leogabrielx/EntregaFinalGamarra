@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <h2>Articulos</h2>
+
+    <div class="container mt-3" style="width: 20rem;">
+
+        <form action="">
+            <input type="text" name='titulo' placeholder='Ingrese titulo...'>
+            <input class="btn btn-primary" type="submit" value="Buscar" />
+        </form>
+        
+        <a href="{% url 'crear_articulo' %}">Crear Nuevo Articulo</a>
+
+    </div>
+
+
+    <div class="container mt-3">
+
+        {% if listado_articulos %}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for articulo in listado_articulos %}
+                    <tr>
+                        <td>{{ articulo.titulo }}</td>
+                        <td>{{ articulo.categoria }}</td>
+                        <td>{{ articulo.autor }}</td>
+                        <td>{{ articulo.fecha_publicacion }}</td>
+                        <td><a href="{% url 'detalle_articulo' articulo.id %}">Detalle</a> || <a href="{% url 'editar_articulo' articulo.id %}">Editar</a> || <a href="{% url 'eliminar_articulo' articulo.id %}">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        {% else %}
+
+            <p>No hay articulos registrados.</p>
+
+        {% endif %}
+    </div>
+
+    
+
+{% endblock %}

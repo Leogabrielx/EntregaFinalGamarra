@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header text-center">Perfil</div>
+                    <div class="card-body">
+                                                   
+                        {% if request.user.infoextra.avatar %}
+                            <div class="d-flex justify-content-center">
+                                <img class="form-group" src={{request.user.infoextra.avatar.url}} alt="" height="100px">
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <label class="">Email</label>
+                            <label class="form-control">{{ request.user.email }}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="" >Nombre</label>
+                            <label class="form-control">{{ request.user.first_name }}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="">Apellido</label>
+                            <label class="form-control">{{ request.user.last_name }}</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="">Link</label>
+                            <label class="form-control">{{ request.user.infoextra.link }}</label>
+                        </div>
+                        
+                        <div class="text-center">
+                            <a href="{% url 'editar_perfil' %}" class="btn btn-primary btn-block">Editar Perfil</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+    <h2>Articulos</h2>
+
+    <div class="container mt-3" style="width: 20rem;">
+        <h3>Cargar nuevo articulo</h3>
+        {% if miFormulario.errors %}
+            <p class="danger">Datos incorrectos</p>
+        {% endif %}
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Categoria: {{ miFormulario.categoria }}</td>
+                </tr>
+                <tr>
+                    <td>Autor: {{ miFormulario.autor }}</td>
+                </tr>
+                <tr>
+                    <td>Titulo: {{ miFormulario.titulo }}</td>
+                </tr>
+                <tr>
+                    <td>Texto: {{ miFormulario.texto }}</td>
+                </tr>
+                <tr>
+                    <td>Fecha: {{ miFormulario.fecha_publicacion }}</td>
+                </tr>
+            </table>
+            <div class="row justify-content-center mt-2">
+                <button class="btn btn-primary col-4" type="submit">Agregar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container mt-3">
+        <h6>Articulos existentes:</h6>
+
+        {% if articulos %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for articulo in articulos %}
+                    <tr>
+                        <td>{{ articulo.titulo }}</td>
+                        <td>{{ articulo.categoria }}</td>
+                        <td>{{ articulo.autor }}</td>
+                        <td>{{ articulo.fecha_publicacion }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No hay articulos registrados.</p>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

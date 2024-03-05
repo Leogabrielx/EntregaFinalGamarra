@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+    <h1>Mis Publicaciones</h1>
+
+    <div class="container col-lg-4 mt-3 d-flex justify-content-center">
+        {% if request.user.is_authenticated %}
+            <a class="btn btn-primary" href="{% url 'crear_articulo' %}">Crear Nuevo Articulo</a>
+        {% endif %}
+    </div>
+
+    <div class="container mt-3">
+        <h6>Articulos:</h6>
+
+        <div class="d-flex row">
+            {% if articulos %}
+                {% for articulo in articulos %}        
+                    <div class="card m-2 col-12">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{% url 'detalle_articulo' articulo.id %}">{{ articulo.titulo }}</a></h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">{{ articulo.categoria }}</h6>
+                            <h6 class="card-subtitle mb-2 text-body-primary">{{ articulo.subtitulo }}</h6>
+                            <p class="card-text">{{ articulo.texto | safe }}</p>
+                            {% if articulo.autor.infoextra.avatar %}
+                                <img src={{articulo.autor.infoextra.avatar.url}} alt="" height="40px">
+                                {{ articulo.autor }} - {{ articulo.fecha_publicacion }}
+                            {% else %}
+                                <p class="card-text">{{ articulo.autor }} - {{ articulo.fecha_publicacion }}</p>
+                            {% endif %}
+                            {% if request.user == articulo.autor %}
+                                <div class="mt-2">
+                                    <a class="btn btn-primary" href="{% url 'editar_articulo' articulo.id %}">Editar</a> - <a class="btn btn-danger" href="{% url 'eliminar_articulo' articulo.id %}">Eliminar</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>         
+                {% endfor %}
+            {% else %}
+                <p>Todavía no has publicado nada!</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}
