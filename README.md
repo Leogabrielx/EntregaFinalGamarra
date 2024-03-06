@@ -14,5 +14,8 @@ python manage.py runserver
 
 127.0.0.1:8000/admin
 
-usuario: coder contraseña: Contraseña1234
+usuario: coder 
+contraseña: Contraseña1234
+
+Video: https://youtu.be/kbUNie3iUBw
 
